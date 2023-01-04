@@ -16,6 +16,6 @@ final class Day2Tests: XCTestCase {
 2x3x4
 1x1x10
 """
-        XCTAssertEqual(day.run(input: input), "101")
+        XCTAssertEqual(day.run(input: input), "48")
     }
 }
