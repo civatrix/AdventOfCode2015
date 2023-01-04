@@ -9,6 +9,19 @@ import Foundation
 
 final class Day1: Day {
     func run(input: String) -> String {
-        return (input.filter { $0 == "(" }.count - input.filter { $0 == ")" }.count).description
+        var floor = 0
+        for (index, char) in input.enumerated() {
+            if char == "(" {
+                floor += 1
+            } else {
+                floor -= 1
+            }
+            
+            if floor == -1 {
+                return (index + 1).description
+            }
+        }
+        
+        return "not found"
     }
 }
