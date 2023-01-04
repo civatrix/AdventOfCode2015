@@ -11,17 +11,17 @@ final class Day3Tests: XCTestCase {
     let day = Day3()
     
     func testDay() throws {
-        let input = ">"
-        XCTAssertEqual(day.run(input: input), "2")
+        let input = "^v"
+        XCTAssertEqual(day.run(input: input), "3")
     }
     
     func testDay2() throws {
         let input = "^>v<"
-        XCTAssertEqual(day.run(input: input), "4")
+        XCTAssertEqual(day.run(input: input), "3")
     }
     
     func testDay3() throws {
         let input = "^v^v^v^v^v"
-        XCTAssertEqual(day.run(input: input), "2")
+        XCTAssertEqual(day.run(input: input), "11")
     }
 }

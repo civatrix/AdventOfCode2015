@@ -11,17 +11,27 @@ final class Day3: Day {
     func run(input: String) -> String {
         var set = Set<Point>([.zero])
         
-        var point = Point.zero
-        for char in input {
-            switch char {
-            case "<": point += .left
-            case ">": point += .right
-            case "^": point += .up
-            case "v": point += .down
+        var santa = Point.zero
+        var robo = Point.zero
+        for char in input.chunks(ofCount: 2) {
+            switch char.first! {
+            case "<": santa += .left
+            case ">": santa += .right
+            case "^": santa += .up
+            case "v": santa += .down
             default: fatalError("Unknown direction: \(char)")
             }
             
-            set.insert(point)
+            switch char.last! {
+            case "<": robo += .left
+            case ">": robo += .right
+            case "^": robo += .up
+            case "v": robo += .down
+            default: fatalError("Unknown direction: \(char)")
+            }
+            
+            set.insert(santa)
+            set.insert(robo)
         }
         
         return set.count.description
