@@ -1,3 +1,5 @@
 */input
 AdventOfCode/Secrets.xcconfig
 *.xcbkptlist
+*.xcuserstate
+*.DS_Store

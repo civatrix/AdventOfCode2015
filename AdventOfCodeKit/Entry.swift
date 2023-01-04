@@ -10,7 +10,8 @@ import AppKit
 
 let inputBaseUrl = FileManager.default.homeDirectoryForCurrentUser
     .appendingPathComponent("Documents", isDirectory: true)
-    .appendingPathComponent("AdventOfCode", isDirectory: true)
+    .appendingPathComponent("Advent of Code", isDirectory: true)
+    .appendingPathComponent("2015", isDirectory: true)
 
 func inputUrl(for day: String) -> URL {
     return inputBaseUrl

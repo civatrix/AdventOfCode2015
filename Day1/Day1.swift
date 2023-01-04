@@ -9,6 +9,6 @@ import Foundation
 
 final class Day1: Day {
     func run(input: String) -> String {
-        return ""
+        return (input.filter { $0 == "(" }.count - input.filter { $0 == ")" }.count).description
     }
 }
