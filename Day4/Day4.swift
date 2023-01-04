@@ -6,9 +6,18 @@
 //
 
 import Foundation
+import Crypto
 
 final class Day4: Day {
     func run(input: String) -> String {
-        return ""
+        for index in 0 ... .max {
+            let key = "\(input.trimmingCharacters(in: .newlines))\(index)"
+            let hash = Crypto.Insecure.MD5.hash(data: key.data(using: .utf8)!).description
+            if hash.split(separator: " ").last!.prefix(5) == "00000" {
+                return index.description
+            }
+        }
+        
+        return "not found"
     }
 }
