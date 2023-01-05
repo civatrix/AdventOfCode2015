@@ -10,11 +10,10 @@ import Foundation
 final class Day5: Day {
     func run(input: String) -> String {
         return input.lines.filter { line in
-            let has3Vowels = line.contains(/[aeiou].*[aeiou].*[aeiou]/)
-            let hasPair = line.contains(/(.)\1/)
-            let hasIllegalPair = line.contains(/(ab)|(cd)|(pq)|(xy)/)
+            let hasPair = line.contains(/(..).*\1/)
+            let hasRepeat = line.contains(/(.).\1/)
             
-            return has3Vowels && hasPair && !hasIllegalPair
+            return hasPair && hasRepeat
         }
         .count
         .description
