@@ -9,7 +9,7 @@ import Foundation
 
 final class Day6: Day {
     func run(input: String) -> String {
-        var lights = Set<Point>()
+        var lights = [Point: Int]()
         
         for line in input.lines {
             let digits = line.allDigits
@@ -21,15 +21,13 @@ final class Day6: Day {
                     let point = Point(x: x, y: y)
                     
                     if line.starts(with: "turn on") {
-                        lights.insert(point)
+                        lights[point, default: 0] += 1
                     } else if line.starts(with: "turn off") {
-                        lights.remove(point)
-                    } else if line.starts(with: "toggle") {
-                        if lights.contains(point) {
-                            lights.remove(point)
-                        } else {
-                            lights.insert(point)
+                        if lights[point, default: 0] > 0 {
+                            lights[point, default: 0] -= 1
                         }
+                    } else if line.starts(with: "toggle") {
+                        lights[point, default: 0] += 2
                     } else {
                         fatalError("Invalid instruction: \(line)")
                     }
@@ -37,6 +35,6 @@ final class Day6: Day {
             }
         }
         
-        return lights.count.description
+        return lights.values.sum.description
     }
 }
