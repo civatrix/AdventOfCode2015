@@ -11,7 +11,13 @@ final class Day8Tests: XCTestCase {
     let day = Day8()
     
     func testDay() throws {
-        let input = ""
-        XCTAssertEqual(day.run(input: input), "")
+        let input =
+"""
+""
+"abc"
+"aaa\\"aaa"
+"\\x27"
+"""
+        XCTAssertEqual(day.run(input: input), "12")
     }
 }
