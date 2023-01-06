@@ -18,6 +18,6 @@ final class Day8Tests: XCTestCase {
 "aaa\\"aaa"
 "\\x27"
 """
-        XCTAssertEqual(day.run(input: input), "12")
+        XCTAssertEqual(day.run(input: input), "19")
     }
 }
