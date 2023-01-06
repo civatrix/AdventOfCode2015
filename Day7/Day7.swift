@@ -9,14 +9,21 @@ import Foundation
 
 final class Day7: Day {
     func run(input: String) -> String {
-        var lines = input.lines.map { $0.split(separator: " ") }
-        var map = [Substring: UInt16]()
+        let lines = input.lines.map { $0.split(separator: " ") }
+        
+        let a = runCircuit(lines, [Substring: UInt16]())
+        return runCircuit(lines, ["b": a]).description
+    }
+    
+    func runCircuit(_ input: [[Substring]], _ initialMap: [Substring: UInt16]) -> UInt16 {
+        var lines = input
+        var map = initialMap
         
         var lineIndex = 0
         while map["a"] == nil {
             let line = lines[wrapped: lineIndex]
             
-            if line.count == 3, let lhs = map[line[0]] ?? UInt16(line[0]) {
+            if line.count == 3, map[line[2]] == nil, let lhs = map[line[0]] ?? UInt16(line[0]) {
                 map[line[2]] = lhs
                 lines.remove(at: lineIndex % lines.count)
                 lineIndex -= 1
@@ -45,6 +52,6 @@ final class Day7: Day {
             lineIndex += 1
         }
         
-        return map["a"]!.description
+        return map["a"]!
     }
 }
