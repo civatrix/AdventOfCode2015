@@ -11,7 +11,7 @@ final class Day10: Day {
     func run(input: String) -> String {
         var output = input.dropLast()
         
-        for _ in 0 ..< 40 {
+        for _ in 0 ..< 50 {
             output = lookAndSay(output)
         }
         
