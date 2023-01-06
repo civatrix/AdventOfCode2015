@@ -19,7 +19,7 @@ final class Day9: Day {
         return distances.keys.permutations().map { option in
             return option.adjacentPairs().map { distances[$0.0]![$0.1]! }.sum
         }
-        .min()!
+        .max()!
         .description
     }
 }
