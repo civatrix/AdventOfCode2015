@@ -43,9 +43,9 @@ public func run(_ day: String, _ year: String?, _ cookie: String?) async {
     
     let input: String
     if let fileInput = try? String(contentsOf: url), !fileInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-        input = fileInput
+        input = fileInput.trimmingCharacters(in: .newlines)
     } else if let year, let cookie, let netInput = await downloadInput(for: day, year: year, cookie: cookie) {
-        input = netInput
+        input = netInput.trimmingCharacters(in: .newlines)
     } else {
         debugPrint("Unable to find input for \(day). Check Day\(day)/input or verify your cookie is still good.")
         return
