@@ -13,6 +13,10 @@ final class Day11: Day {
     let l = UnicodeScalar("o").value - UnicodeScalar("a").value
     let o = UnicodeScalar("l").value - UnicodeScalar("a").value
     func run(input: String) -> String {
+        nextPassword(input: nextPassword(input: input))
+    }
+    
+    func nextPassword(input: String) -> String {
         var characters = input.unicodeScalars.map { $0.value - a }
         
         while true {
