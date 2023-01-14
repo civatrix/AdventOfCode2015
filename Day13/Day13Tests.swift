@@ -26,6 +26,6 @@ David would gain 46 happiness units by sitting next to Alice.
 David would lose 7 happiness units by sitting next to Bob.
 David would gain 41 happiness units by sitting next to Carol.
 """
-        XCTAssertEqual(day.run(input: input), "330")
+        XCTAssertEqual(day.run(input: input), "286")
     }
 }

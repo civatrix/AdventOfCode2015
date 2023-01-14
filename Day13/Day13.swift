@@ -29,8 +29,8 @@ final class Day13: Day {
         }
         
         var maxHappiness = 0
-        for permutation in happiness.keys.permutations() {
-            let happiness = (permutation + [permutation[0]]).adjacentPairs().map { happiness[$0.0]![$0.1]! + happiness[$0.1]![$0.0]! }.sum
+        for permutation in (happiness.keys + ["you"]).permutations() {
+            let happiness = (permutation + [permutation[0]]).adjacentPairs().map { (happiness[$0.0]?[$0.1] ?? 0) + (happiness[$0.1]?[$0.0] ?? 0) }.sum
             maxHappiness = max(happiness, maxHappiness)
         }
         
