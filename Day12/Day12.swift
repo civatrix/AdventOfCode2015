@@ -9,6 +9,6 @@ import Foundation
 
 final class Day12: Day {
     func run(input: String) -> String {
-        return ""
+        return input.allDigits.sum.description
     }
 }
