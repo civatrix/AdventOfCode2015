@@ -16,7 +16,7 @@ final class Day15Tests: XCTestCase {
 Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8
 Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3
 """
-        XCTAssertEqual(day.run(input: input), "62842880")
+        XCTAssertEqual(day.run(input: input), "57600000")
     }
     
     func testMixtures() throws {

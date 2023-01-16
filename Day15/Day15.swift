@@ -10,15 +10,15 @@ import Foundation
 final class Day15: Day {
     struct Ingredient {
         static func +(_ lhs: Ingredient, _ rhs: Ingredient) -> Ingredient {
-            return .init(capacity: lhs.capacity + rhs.capacity, durability: lhs.durability + rhs.durability, flavour: lhs.flavour + rhs.flavour, texture: lhs.texture + rhs.texture)
+            return .init(capacity: lhs.capacity + rhs.capacity, durability: lhs.durability + rhs.durability, flavour: lhs.flavour + rhs.flavour, texture: lhs.texture + rhs.texture, calories: lhs.calories + rhs.calories)
         }
         
         static func *(_ lhs: Ingredient, _ rhs: Int) -> Ingredient {
-            return .init(capacity: lhs.capacity * rhs, durability: lhs.durability * rhs, flavour: lhs.flavour * rhs, texture: lhs.texture *	 rhs)
+            return .init(capacity: lhs.capacity * rhs, durability: lhs.durability * rhs, flavour: lhs.flavour * rhs, texture: lhs.texture *	 rhs, calories: lhs.calories * rhs)
         }
         
-        static let zero = Ingredient(capacity: 0, durability: 0, flavour: 0, texture: 0)
-        let capacity, durability, flavour, texture: Int
+        static let zero = Ingredient(capacity: 0, durability: 0, flavour: 0, texture: 0, calories: 0)
+        let capacity, durability, flavour, texture, calories: Int
         var score: Int {
             guard capacity > 0, durability > 0, flavour > 0, texture > 0 else { return 0 }
             return capacity * durability * flavour * texture
@@ -28,18 +28,20 @@ final class Day15: Day {
     func run(input: String) -> String {
         let ingredients = input.lines.map {
             let numbers = $0.allDigits
-            return Ingredient(capacity: numbers[0], durability: numbers[1], flavour: numbers[2], texture: numbers[3])
+            return Ingredient(capacity: numbers[0], durability: numbers[1], flavour: numbers[2], texture: numbers[3], calories: numbers[4])
         }
         
         var maxScore = 0
         for counts in mixtures(index: ingredients.count, total: 100) {
-            let score = zip(counts, ingredients)
+            let cookie = zip(counts, ingredients)
                 .map { (count, ingredient) in
                     return ingredient * count
                 }
                 .reduce(.zero, +)
-                .score
-            maxScore = max(score, maxScore)
+            
+            if cookie.calories == 500 {
+                maxScore = max(cookie.score, maxScore)
+            }
         }
         
         return maxScore.description
