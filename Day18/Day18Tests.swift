@@ -20,6 +20,6 @@ final class Day18Tests: XCTestCase {
 #.#..#
 ####..
 """
-        XCTAssertEqual(day.run(input: input), "4")
+        XCTAssertEqual(day.run(input: input), "17")
     }
 }
