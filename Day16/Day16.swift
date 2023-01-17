@@ -31,7 +31,7 @@ final class Day16: Day {
                             return false
                         }
                     case "cats":
-                        if value != target.cats {
+                        if value <= target.cats {
                             return false
                         }
                     case "samoyeds":
@@ -39,7 +39,7 @@ final class Day16: Day {
                             return false
                         }
                     case "pomeranians":
-                        if value != target.pomeranians {
+                        if value >= target.pomeranians {
                             return false
                         }
                     case "akitas":
@@ -51,11 +51,11 @@ final class Day16: Day {
                             return false
                         }
                     case "goldfish":
-                        if value != target.goldfish {
+                        if value >= target.goldfish {
                             return false
                         }
                     case "trees":
-                        if value != target.trees {
+                        if value <= target.trees {
                             return false
                         }
                     case "cars":
