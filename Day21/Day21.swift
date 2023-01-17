@@ -56,7 +56,7 @@ final class Day21: Day {
     
     func run(input: String) -> String {
         let numbers = input.allDigits
-        var boss = Character(health: numbers[0], damage: numbers[1], armour: numbers[2])
+        let boss = Character(health: numbers[0], damage: numbers[1], armour: numbers[2])
         
         let items: [[Item]] = [
             [[8, 4, 0],
@@ -82,17 +82,17 @@ final class Day21: Day {
              [80, 0, 3]],
         ]
         
-        var bestCost = Int.max
+        var bestCost = 0
         var bestItems = [Item]()
         for weapon in items[0] {
             for armour in items[1] {
                 for rings in items[2].permutations(ofCount: 2) {
                     let items = [weapon, armour, rings[0], rings[1]]
                     let cost = items.map { $0.cost }.sum
-                    guard cost < bestCost else { continue }
+                    guard cost > bestCost else { continue }
                     
                     var hero = Character(items: items)
-                    if hero.beats(boss) {
+                    if !hero.beats(boss) {
                         bestCost = cost
                         bestItems = items
                     }
