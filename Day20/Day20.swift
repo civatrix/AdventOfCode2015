@@ -14,9 +14,9 @@ final class Day20: Day {
         var house = 1
         while true {
             var presents = 0
-            for elf in 1 ... Int(Double(house).squareRoot()) where house % elf == 0 {
-                presents += elf * 10
-                presents += (house / elf) * 10
+            for elf in (1 ... Int(Double(house).squareRoot())).prefix(50) where house % elf == 0 {
+                presents += elf * 11
+                presents += (house / elf) * 11
             }
             
             if presents >= target { break }
