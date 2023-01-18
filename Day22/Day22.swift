@@ -72,8 +72,11 @@ final class Day22: Day {
         }
         
         func nextTurn(casting: Spell) -> Turn? {
+            if playerHP == 1 {
+                return nil
+            }
             if enemyHP - (poisonDuration > 0 ? 3 : 0) <= 0 {
-                return Turn(playerHP: playerHP,
+                return Turn(playerHP: playerHP - 1,
                             mana: mana,
                             enemyHP: 0,
                             damage: damage,
@@ -89,7 +92,7 @@ final class Day22: Day {
             let nextTurn: Turn
             switch casting {
             case .missile:
-                nextTurn = Turn(playerHP: playerHP,
+                nextTurn = Turn(playerHP: playerHP - 1,
                                 mana: nextMana - casting.cost,
                                 enemyHP: enemyHP - 4 - (poisonDuration > 0 ? 3 : 0),
                                 damage: damage,
@@ -98,7 +101,7 @@ final class Day22: Day {
                                 rechargeDuration: max(rechargeDuration - 1, 0),
                                 totalMana: totalMana + casting.cost)
             case .drain:
-                nextTurn = Turn(playerHP: playerHP + 2,
+                nextTurn = Turn(playerHP: playerHP - 1 + 2,
                                 mana: nextMana - casting.cost,
                                 enemyHP: enemyHP - 2 - (poisonDuration > 0 ? 3 : 0),
                                 damage: damage,
@@ -108,7 +111,7 @@ final class Day22: Day {
                                 totalMana: totalMana + casting.cost)
             case .shield:
                 guard shieldDuration <= 1 else { return nil }
-                nextTurn = Turn(playerHP: playerHP,
+                nextTurn = Turn(playerHP: playerHP - 1,
                                 mana: nextMana - casting.cost,
                                 enemyHP: enemyHP - (poisonDuration > 0 ? 3 : 0),
                                 damage: damage,
@@ -118,7 +121,7 @@ final class Day22: Day {
                                 totalMana: totalMana + casting.cost)
             case .poison:
                 guard poisonDuration <= 1 else { return nil }
-                nextTurn = Turn(playerHP: playerHP,
+                nextTurn = Turn(playerHP: playerHP - 1,
                                 mana: nextMana - casting.cost,
                                 enemyHP: enemyHP - (poisonDuration > 0 ? 3 : 0),
                                 damage: damage,
@@ -128,7 +131,7 @@ final class Day22: Day {
                                 totalMana: totalMana + casting.cost)
             case .recharge:
                 guard rechargeDuration <= 1 else { return nil }
-                nextTurn = Turn(playerHP: playerHP,
+                nextTurn = Turn(playerHP: playerHP - 1,
                                 mana: nextMana - casting.cost,
                                 enemyHP: enemyHP - (poisonDuration > 0 ? 3 : 0),
                                 damage: damage,
