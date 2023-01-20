@@ -9,13 +9,20 @@ import Foundation
 
 class ElfCode {
     enum Instruction {
-        case noop, addx(Int), delay
+        case half(Substring), triple(Substring), increment(Substring), jump(Int), jumpEven(Substring, Int), jumpOne(Substring, Int)
         
         init(_ input: String) {
-            let instruction = input.split(separator: " ")[0]
+            guard let match = input.wholeMatch(of: /(\w+) (([^+-])|([+-]\d+))(, ([+-]\d+))?/)?.output else {
+                fatalError("Unknown instruction: \(input)")
+            }
+            let instruction = match.1
             switch instruction {
-            case "noop": self = .noop
-            case "addx": self = .addx(Int(input.split(separator: " ")[1])!)
+            case "hlf": self = .half(match.2)
+            case "tpl": self = .triple(match.2)
+            case "inc": self = .increment(match.2)
+            case "jmp": self = .jump(Int(match.2)!)
+            case "jie": self = .jumpEven(match.2, Int(match.6!)!)
+            case "jio": self = .jumpOne(match.2, Int(match.6!)!)
             default:
                 print("Unknown instruction: \(input)")
                 exit(1)
@@ -23,34 +30,40 @@ class ElfCode {
         }
     }
     
-    var cycle = 1
-    var register = 1
-    var instructions: [Instruction]
+    var registers: [Substring: Int] = ["a": 0, "b": 0]
+    let instructions: [Instruction]
     var instructionPointer = 0
     
     init(_ lines: [String]) {
         instructions = lines.map(Instruction.init)
-        instructions = instructions.flatMap {
-            switch $0 {
-            case .delay, .noop:
-                return [$0]
-            case .addx(_):
-                return [.delay, $0]
-            }
-        }
+    }
+    
+    func run() {
+        while step() {}
     }
     
     func step() -> Bool {
         let instruction = instructions[instructionPointer]
         switch instruction {
-        case .noop, .delay:
-            break
-        case let .addx(value):
-            register += value
+        case let .half(register):
+            registers[register]! /= 2
+        case let .triple(register):
+            registers[register]! *= 3
+        case let .increment(register):
+            registers[register]! += 1
+        case let .jump(value):
+            instructionPointer += value - 1
+        case let .jumpEven(register, value):
+            if registers[register]! % 2 == 0 {
+                instructionPointer += value - 1
+            }
+        case let .jumpOne(register, value):
+            if registers[register]! == 1 {
+                instructionPointer += value - 1
+            }
         }
         
         instructionPointer += 1
-        cycle += 1
         return instructionPointer < instructions.count
     }
 }
