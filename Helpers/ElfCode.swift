@@ -30,7 +30,7 @@ class ElfCode {
         }
     }
     
-    var registers: [Substring: Int] = ["a": 0, "b": 0]
+    var registers: [Substring: Int] = ["a": 1, "b": 0]
     let instructions: [Instruction]
     var instructionPointer = 0
     
